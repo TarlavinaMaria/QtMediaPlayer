@@ -20,7 +20,7 @@
   <widget class="QPushButton" name="pushButtonPlay">
    <property name="geometry">
     <rect>
-     <x>210</x>
+     <x>120</x>
      <y>70</y>
      <width>80</width>
      <height>21</height>
@@ -33,7 +33,7 @@
   <widget class="QPushButton" name="pushButtonPrev">
    <property name="geometry">
     <rect>
-     <x>120</x>
+     <x>30</x>
      <y>70</y>
      <width>80</width>
      <height>21</height>
@@ -47,7 +47,7 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>70</y>
+     <y>560</y>
      <width>80</width>
      <height>21</height>
     </rect>
@@ -59,7 +59,7 @@
   <widget class="QPushButton" name="pushButtonPause">
    <property name="geometry">
     <rect>
-     <x>300</x>
+     <x>210</x>
      <y>70</y>
      <width>80</width>
      <height>21</height>
@@ -72,7 +72,7 @@
   <widget class="QPushButton" name="pushButtonStop">
    <property name="geometry">
     <rect>
-     <x>390</x>
+     <x>300</x>
      <y>70</y>
      <width>80</width>
      <height>21</height>
@@ -85,7 +85,7 @@
   <widget class="QPushButton" name="pushButtonNext">
    <property name="geometry">
     <rect>
-     <x>480</x>
+     <x>390</x>
      <y>70</y>
      <width>80</width>
      <height>21</height>
@@ -111,10 +111,10 @@
   <widget class="QLabel" name="labelVolume">
    <property name="geometry">
     <rect>
-     <x>570</x>
+     <x>610</x>
      <y>40</y>
-     <width>171</width>
-     <height>16</height>
+     <width>141</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="text">
@@ -124,7 +124,7 @@
   <widget class="QSlider" name="horizontalSliderVolume">
    <property name="geometry">
     <rect>
-     <x>570</x>
+     <x>590</x>
      <y>70</y>
      <width>160</width>
      <height>16</height>
@@ -152,8 +152,8 @@
     <rect>
      <x>30</x>
      <y>110</y>
-     <width>47</width>
-     <height>13</height>
+     <width>531</width>
+     <height>16</height>
     </rect>
    </property>
    <property name="text">
@@ -171,6 +171,29 @@
    </property>
    <property name="text">
     <string>Duration:</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButtonMute">
+   <property name="geometry">
+    <rect>
+     <x>550</x>
+     <y>70</y>
+     <width>31</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QTableView" name="tableViewPlaylist">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>170</y>
+     <width>731</width>
+     <height>381</height>
+    </rect>
    </property>
   </widget>
  </widget>
