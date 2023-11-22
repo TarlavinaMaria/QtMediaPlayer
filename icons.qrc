@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/ico">
+        <file>ico/music_player_icon_159954.ico</file>
+        <file>ico/vinyl_music_player_icon_123865.ico</file>
+    </qresource>
+</RCC>
