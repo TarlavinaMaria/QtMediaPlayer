@@ -20,10 +20,13 @@ Widget::Widget(QWidget *parent)
     ui->pushButtonStop->setIcon(style()->standardIcon(QStyle::SP_MediaStop));
     ui->pushButtonNext->setIcon(style()->standardIcon(QStyle::SP_MediaSkipForward));
     ui->pushButtonMute->setIcon(style()->standardIcon(QStyle::SP_MediaVolume));
+    ui->pushButtonRepeat->setIcon(style()->standardIcon(QStyle::SP_BrowserReload));
+    ui->pushButtonDEL->setIcon(style()->standardIcon(QStyle::SP_LineEditClearButton));
+    ui->pushButtonCLR->setIcon(style()->standardIcon(QStyle::SP_BrowserStop));
 
     //                             Player init:
     m_player = new QMediaPlayer(this);
-    m_player->setVolume(70);
+    m_player->setVolume(70);//громкость воспроизведения
     ui->labelVolume->setText(QString("Volume: ").append(QString::number(m_player->volume())));
     ui->horizontalSliderVolume->setValue(m_player->volume());
 
@@ -38,15 +41,24 @@ Widget::Widget(QWidget *parent)
     ui->tableViewPlaylist->horizontalHeader()->setStretchLastSection(true);
     ui->tableViewPlaylist->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
+
+    //Инициализация плейлиста
     m_playlist = new QMediaPlaylist(m_player);
     m_player->setPlaylist(m_playlist);
-
-
+    //Двойное нажатие воспроизвеледние
+    connect(ui->tableViewPlaylist, &QTableView::doubleClicked,[this](const QModelIndex &index)
+    {
+        m_playlist->setCurrentIndex(index.row());
+        m_player->play();
+    });
+    //Выделение трека
 }
 
 Widget::~Widget()
 {
     delete m_player;
+    delete  m_playlist;
+    delete  m_playlist_model;
     delete ui;
 }
 
@@ -106,14 +118,10 @@ void Widget::on_duration_changed(qint64 duration)
     QTime qt_duration = QTime::fromMSecsSinceStartOfDay(duration);//Всемя пройденное с момента начала
     ui->labelDuration->setText(QString("Duration: ").append(qt_duration.toString("mm:ss")));
 }
-
-
 void Widget::on_horizontalSliderProgress_sliderMoved(int position)
 {
     m_player->setPosition(position);
 }
-
-
 void Widget::on_pushButtonMute_clicked()
 {
    muted = !muted;
@@ -131,5 +139,42 @@ void Widget::on_pushButtonPrev_clicked()
 void Widget::on_pushButtonNext_clicked()
 {
     m_playlist->next();
+}
+
+
+void Widget::on_pushButtonPause_clicked()
+{
+    m_player->pause();
+}
+
+
+void Widget::on_pushButtonStop_clicked()
+{
+    m_player->stop();
+}
+
+
+void Widget::on_pushButtonRepeat_clicked()
+{
+    m_playlist->setPlaybackMode(QMediaPlaylist::Loop);//зацикливает плейлист
+}
+
+
+void Widget::on_pushButtonRandom_clicked()
+{
+     m_playlist->setPlaybackMode(QMediaPlaylist::Random);//Воспроизведение в случайном порядке
+}
+
+
+void Widget::on_pushButtonCLR_clicked()
+{
+    m_playlist->clear();
+    m_playlist_model->clear();
+}
+
+
+void Widget::on_pushButtonDEL_clicked()
+{
+
 }
 

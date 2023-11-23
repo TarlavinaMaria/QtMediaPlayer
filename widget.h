@@ -35,6 +35,18 @@ private slots:
 
     void on_pushButtonNext_clicked();
 
+    void on_pushButtonPause_clicked();
+
+    void on_pushButtonStop_clicked();
+
+    void on_pushButtonRepeat_clicked();
+
+    void on_pushButtonRandom_clicked();
+
+    void on_pushButtonCLR_clicked();
+
+    void on_pushButtonDEL_clicked();
+
 private:
     Ui::Widget *ui;
 
