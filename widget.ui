@@ -196,37 +196,11 @@
     </rect>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButtonRepeat">
-   <property name="geometry">
-    <rect>
-     <x>120</x>
-     <y>100</y>
-     <width>80</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButtonRandom">
-   <property name="geometry">
-    <rect>
-     <x>210</x>
-     <y>100</y>
-     <width>80</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Random</string>
-   </property>
-  </widget>
   <widget class="QPushButton" name="pushButtonCLR">
    <property name="geometry">
     <rect>
-     <x>300</x>
-     <y>100</y>
+     <x>120</x>
+     <y>560</y>
      <width>80</width>
      <height>21</height>
     </rect>
@@ -238,14 +212,40 @@
   <widget class="QPushButton" name="pushButtonDEL">
    <property name="geometry">
     <rect>
-     <x>390</x>
-     <y>100</y>
+     <x>210</x>
+     <y>560</y>
      <width>80</width>
      <height>21</height>
     </rect>
    </property>
    <property name="text">
     <string>DEL</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="checkBoxLoop">
+   <property name="geometry">
+    <rect>
+     <x>550</x>
+     <y>560</y>
+     <width>72</width>
+     <height>19</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Loop</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="checkBoxShuffle">
+   <property name="geometry">
+    <rect>
+     <x>610</x>
+     <y>560</y>
+     <width>72</width>
+     <height>19</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Shuffle</string>
    </property>
   </widget>
  </widget>

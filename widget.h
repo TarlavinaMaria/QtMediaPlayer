@@ -16,7 +16,8 @@ class Widget : public QWidget
 public:
     Widget(QWidget *parent = nullptr);
     ~Widget();
-
+    void load_playlist(QString filename);
+    void save_playlist(QString filename);
 private slots:
     void on_pushButtonOpen_clicked();
 
@@ -31,21 +32,9 @@ private slots:
 
     void on_pushButtonMute_clicked();
 
-    void on_pushButtonPrev_clicked();
+    void on_checkBoxLoop_stateChanged(int arg1);
 
-    void on_pushButtonNext_clicked();
-
-    void on_pushButtonPause_clicked();
-
-    void on_pushButtonStop_clicked();
-
-    void on_pushButtonRepeat_clicked();
-
-    void on_pushButtonRandom_clicked();
-
-    void on_pushButtonCLR_clicked();
-
-    void on_pushButtonDEL_clicked();
+    void on_checkBoxShuffle_stateChanged(int arg1);
 
 private:
     Ui::Widget *ui;
@@ -53,6 +42,7 @@ private:
     QMediaPlayer* m_player;
 
     bool muted;
+    const char* DEFAULT_PLAYLIST = "D:\\Repos\\Qt\\build-MediaPlayer-Desktop_Qt_5_12_12_MSVC2015_64bit-Debug\\debug\\playlist.m3u";
 
     QMediaPlaylist* m_playlist;
     QStandardItemModel* m_playlist_model;
