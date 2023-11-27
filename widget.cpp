@@ -6,6 +6,7 @@
 #include <QTime>
 #include <QToolButton>
 #include <QMessageBox>
+#include <QDebug>
 
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
@@ -119,6 +120,45 @@ void Widget::load_playlist(QString filename)
         m_playlist_model->appendRow(items);
     }
 }
+void Widget::load_cue_playlist(QString filename)
+{
+    QFile file(filename);
+    QString performer;
+    QString flac_file;
+    if(!file.open(QIODevice::ReadOnly | QIODevice::Text))return;
+    while(!file.atEnd())
+    {
+        QString buffer(file.readLine());
+        //QMessageBox mb(QMessageBox::Icon::Information, "Info", buffer, QMessageBox::Ok, this);
+        //mb.show();
+        //qDebug() << buffer << endl;
+        if(buffer.split(' ')[0] == "PREFORMER")
+        {
+            performer = buffer.remove(0, strlen("PREFORMER")+1);
+            QMessageBox mb(QMessageBox::Icon::Information, "Info", buffer, QMessageBox::Ok, this);
+            qDebug() << buffer << "\n";
+            qDebug() << performer << "\n";
+        }
+        if(buffer.split(' ')[0] == "FILE")
+        {
+            //flac_file = buffer.remove(0, strlen("FILE")+3);
+            flac_file = buffer.remove("FILE \"").remove("\" WAVE\n");
+            QDir dir = QFileInfo(file).absoluteDir();
+            QString path = dir.absolutePath();
+            QString full_name = path+"/"+flac_file;
+            qDebug() << flac_file << "\n";
+            qDebug() << full_name << "\n";
+
+            QList<QStandardItem*> items;
+            items.append(new QStandardItem(dir.dirName()));
+            items.append(new QStandardItem(full_name));
+            m_playlist_model->appendRow(items);
+            m_playlist->addMedia(QUrl(full_name));
+        }
+
+    }
+    file.close();
+}
 void Widget::on_pushButtonOpen_clicked()
 {
 //    QString file = QFileDialog::getOpenFileName
@@ -137,8 +177,10 @@ void Widget::on_pushButtonOpen_clicked()
                 this,
                 "Open files",
                 "D:\\Music",
-                "Audio files (*.mp3 *.flac)"
+                "Audio files (*.mp3 *.flac);; MP-3 (*.mp3);; Flac (*.flac);;Playlists (*.m3u *.cue);; M3U (*.m3u);; CUE (*.cue)"
                 );
+    if(files.size()>1)
+    {
     for(QString filesPath: files)
     {
         QList<QStandardItem*> items;
@@ -146,6 +188,12 @@ void Widget::on_pushButtonOpen_clicked()
         items.append(new QStandardItem(filesPath));
         m_playlist_model->appendRow(items);
         m_playlist->addMedia(QUrl(filesPath));
+    }
+    }
+    else
+    {
+        if(files.last().split('.').last() == "m3u")load_playlist(files.last());
+        if(files.last().split('.').last() == "cue")load_cue_playlist(files.last());
     }
 }
 
