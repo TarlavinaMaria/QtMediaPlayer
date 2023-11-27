@@ -28,6 +28,7 @@ Widget::Widget(QWidget *parent)
     m_player->setVolume(10);//громкость воспроизведения
     ui->labelVolume->setText(QString("Volume: ").append(QString::number(m_player->volume())));
     ui->horizontalSliderVolume->setValue(m_player->volume());
+    ui->tableViewPlaylist->setSelectionBehavior(QAbstractItemView::SelectRows);
 
     connect(m_player,&QMediaPlayer::positionChanged, this,&Widget::on_position_changed);
     connect(m_player,&QMediaPlayer::durationChanged, this,&Widget::on_duration_changed);
@@ -68,13 +69,15 @@ Widget::Widget(QWidget *parent)
         this->setWindowTitle("Winamp - " + ui->labelComposition->text());
         ui->tableViewPlaylist->selectRow(index);
     });
+    //Кнопка удаления списка
     connect(ui->pushButtonCLR, &QToolButton::clicked,
             [this]()
     {
         m_playlist->clear();
         m_playlist_model->clear();
     });
-    connect(ui->pushButtonDEL, &QToolButton::click,
+    //Кнопка удаления композиции
+    connect(ui->pushButtonDEL, &QToolButton::clicked,
             [this]()
             {
                 QItemSelectionModel* selection = ui->tableViewPlaylist->selectionModel();
